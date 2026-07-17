@@ -1,1 +1,556 @@
+/* ==========================
+   MrScratcher's Universe
+   Part 1
+========================== */
 
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#050816;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* Background */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background:
+    radial-gradient(circle at top,#2b59ff22,transparent 40%),
+    radial-gradient(circle at bottom,#7b2cff22,transparent 40%),
+    linear-gradient(#050816,#090b20);
+
+    z-index:-2;
+}
+
+/* Floating Background */
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background-image:
+    radial-gradient(white 1px,transparent 1px);
+
+    background-size:45px 45px;
+
+    opacity:.15;
+
+    animation:stars 60s linear infinite;
+
+    z-index:-1;
+}
+
+@keyframes stars{
+
+from{
+transform:translateY(0px);
+}
+
+to{
+transform:translateY(-250px);
+}
+
+}
+
+/* Loading Screen */
+
+#loader{
+
+position:fixed;
+
+inset:0;
+
+background:#050816;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+gap:20px;
+
+z-index:9999;
+
+transition:.8s;
+
+}
+
+.loading-bar{
+
+width:300px;
+
+height:14px;
+
+background:#222;
+
+border-radius:20px;
+
+overflow:hidden;
+
+}
+
+.loading-progress{
+
+height:100%;
+
+width:0%;
+
+background:linear-gradient(90deg,#00e5ff,#8f5cff);
+
+animation:load 3s forwards;
+
+}
+
+@keyframes load{
+
+to{
+width:100%;
+}
+
+}
+
+/* Navigation */
+
+nav{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+right:0;
+
+height:80px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:0 70px;
+
+background:rgba(10,10,20,.45);
+
+backdrop-filter:blur(18px);
+
+border-bottom:1px solid rgba(255,255,255,.08);
+
+z-index:1000;
+
+}
+
+.logo{
+
+font-size:30px;
+
+font-weight:700;
+
+color:#6ca8ff;
+
+}
+
+nav ul{
+
+display:flex;
+
+gap:40px;
+
+list-style:none;
+
+}
+
+nav a{
+
+color:white;
+
+text-decoration:none;
+
+font-weight:600;
+
+transition:.3s;
+
+}
+
+nav a:hover{
+
+color:#62b3ff;
+
+}
+
+/* Hero */
+
+.hero{
+
+height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+text-align:center;
+
+padding:40px;
+
+}
+
+.hero-content{
+
+max-width:850px;
+
+}
+
+.hero h1{
+
+font-size:75px;
+
+margin-bottom:20px;
+
+}
+
+.hero span{
+
+color:#62b3ff;
+
+}
+
+.hero p{
+
+font-size:22px;
+
+opacity:.85;
+
+margin-bottom:35px;
+
+line-height:1.8;
+
+}
+
+.hero button{
+
+padding:18px 45px;
+
+font-size:18px;
+
+border:none;
+
+border-radius:50px;
+
+cursor:pointer;
+
+background:linear-gradient(90deg,#2196F3,#7C4DFF);
+
+color:white;
+
+font-weight:bold;
+
+transition:.3s;
+
+box-shadow:0 0 30px #2196F355;
+
+}
+
+.hero button:hover{
+
+transform:translateY(-5px) scale(1.05);
+
+box-shadow:0 0 45px #2196F3AA;
+
+}
+
+.scroll{
+
+position:absolute;
+
+bottom:35px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+opacity:.6;
+
+animation:bounce 2s infinite;
+
+}
+
+@keyframes bounce{
+
+0%,100%{
+
+transform:translate(-50%,0);
+
+}
+
+50%{
+
+transform:translate(-50%,12px);
+
+}
+
+}
+
+/* ==========================================
+   Part 3 - Animations, Utilities & Responsive
+========================================== */
+
+/* Fade-in animation */
+
+.fade-in{
+    opacity:0;
+    transform:translateY(40px);
+    transition:all .8s ease;
+}
+
+.fade-in.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* Card hover glow */
+
+.game-card{
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease,
+        border-color .35s ease;
+}
+
+.game-card:hover{
+    transform:translateY(-12px);
+    box-shadow:0 20px 60px rgba(0,170,255,.35);
+    border-color:#4da6ff;
+}
+
+/* Floating effect */
+
+.float{
+    animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-10px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
+
+/* Gradient text */
+
+.gradient-text{
+
+background:linear-gradient(
+90deg,
+#4da6ff,
+#7b61ff,
+#00d4ff
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+background-clip:text;
+
+}
+
+/* Custom scrollbar */
+
+::-webkit-scrollbar{
+
+width:12px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:#070b18;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#3c7eff;
+
+border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+background:#68a8ff;
+
+}
+
+/* Selection */
+
+::selection{
+
+background:#4da6ff;
+
+color:white;
+
+}
+
+/* Buttons */
+
+button{
+
+font-family:inherit;
+
+}
+
+/* Images */
+
+img{
+
+max-width:100%;
+
+display:block;
+
+}
+
+/* Links */
+
+a{
+
+transition:.25s;
+
+}
+
+/* Mobile */
+
+@media(max-width:1000px){
+
+nav{
+
+padding:20px;
+
+flex-direction:column;
+
+gap:15px;
+
+height:auto;
+
+}
+
+nav ul{
+
+gap:20px;
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+}
+
+.hero h1{
+
+font-size:50px;
+
+}
+
+.hero p{
+
+font-size:18px;
+
+}
+
+.game-grid{
+
+grid-template-columns:1fr;
+
+}
+
+iframe{
+
+width:100%;
+
+height:420px;
+
+}
+
+.about-box{
+
+padding:30px;
+
+}
+
+}
+
+@media(max-width:600px){
+
+.hero h1{
+
+font-size:38px;
+
+}
+
+.logo{
+
+font-size:24px;
+
+}
+
+.hero button{
+
+width:100%;
+
+}
+
+.features{
+
+justify-content:center;
+
+}
+
+iframe{
+
+height:350px;
+
+}
+
+}
+
+/* Footer */
+
+footer{
+
+padding:40px;
+
+text-align:center;
+
+opacity:.7;
+
+font-size:14px;
+
+}
+
+/* End */
